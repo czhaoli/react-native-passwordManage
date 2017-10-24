@@ -71,7 +71,6 @@ class Login extends Component {
   }
   login() {
     const {pwd, loginPwd} = this.state;
-    console.log(pwd, loginPwd);
     if (loginPwd === pwd) {
       const resetAction = NavigationActions.reset({
         index: 0,
@@ -101,6 +100,7 @@ class Login extends Component {
            labelNumber={5}
            value={pw}
            onChange={this.pwChange.bind(this)}
+           onSubmitEditing={this.sign.bind(this)}
          ><Text style={{...styles.text, textAlign: 'right', marginRight: 0, }}>密码：</Text></InputItem>
           <InputItem
            placeholder="请输入"
@@ -108,6 +108,7 @@ class Login extends Component {
            labelNumber={5}
            value={confirm}
            onChange={this.confirmChange.bind(this)}
+           onSubmitEditing={this.sign.bind(this)}
          ><Text style={{...styles.text, textAlign: 'right', marginRight: 0, }}>确认密码：</Text></InputItem>
         <WhiteSpace size='lg'/>
         <Button type="primary" onClick={this.sign.bind(this)}>确定</Button>
@@ -125,6 +126,7 @@ class Login extends Component {
          value={loginPwd}
          clear
          onChange={this.loginPwdChange.bind(this)}
+         onSubmitEditing={this.login.bind(this)}
        >密码：</InputItem>
         <WhiteSpace size='lg'/>
         <Button type="primary" onClick={this.login.bind(this)}>登录</Button>

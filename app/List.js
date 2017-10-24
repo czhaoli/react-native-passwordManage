@@ -6,10 +6,11 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, StateUtils } from 'react-navigation'
-import { List, Button, WhiteSpace, WingBlank, Flex, InputItem } from 'antd-mobile';
+import { List, Button, WhiteSpace, WingBlank, Flex, InputItem, SearchBar} from 'antd-mobile';
 import s from './styles';
 import * as actions from './redux/storage/storageAct';
 const arrow = require('antd-mobile/lib/style/images/arrow.png');
@@ -34,14 +35,14 @@ class DataList extends Component {
     const {name = '', remarks = ''} = item || {};
     return (
       <TouchableOpacity onPress={this.itemClick.bind(this, item)}>
-        <View key={index} style={[Line, {justifyContent: 'space-between', paddingLeft: 15, paddingRight: 15, backgroundColor: 'white'}]}>
+        <View key={index} style={[Line, {justifyContent: 'space-between', paddingLeft: 15, paddingRight: 15, backgroundColor: 'white', borderBottomWidth: 1}]}>
           <View>
             <Text
               key={1}
-              style={[s.fs24, s.c0, s.lh28, s.h30, {...this.getHeightByContent(name)}]}
+              style={[s.fs28, s.c0, s.lh32, s.h34, {...this.getHeightByContent(name)}]}
               numberOfLines={1}>{name}</Text>
               <Text key={2}
-                style={[s.fs24, s.c6, s.lh28, s.h30, {...this.getHeightByContent(remarks)}]}
+                style={[s.fs28, s.c6, s.lh32, s.h34, {...this.getHeightByContent(remarks)}]}
                 numberOfLines={1}>{remarks}</Text>
               </View>
               <Image style={Arrow} source={arrow}/>
@@ -56,6 +57,12 @@ class DataList extends Component {
       return {}
     }
   }
+  onChange(value) {
+    this.props.searchList(value);
+  }
+  onCancel() {
+    Keyboard.dismiss();
+  }
   render() {
     const {list = []} = this.props;
     const datas = list.map(item => {
@@ -63,10 +70,14 @@ class DataList extends Component {
       return item;
     });
     return (
-      <FlatList
-        data={datas}
-        renderItem={this.renderItem.bind(this)}
-      />
+      <View style={{flex: 1, }}>
+        <SearchBar ref={(ref)=>this.searchBar = ref} placeholder="账号、备注" onChange={this.onChange.bind(this)} onCancel={this.onCancel.bind(this)}/>
+        <FlatList
+          style={{flex: 1}}
+          data={datas}
+          renderItem={this.renderItem.bind(this)}
+        />
+      </View>
     );
   }
 }
