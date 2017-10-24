@@ -4,6 +4,7 @@ import {
   Text,
   TextInput,
   Modal,
+  Keyboard,
 } from 'react-native';
 import { connect } from 'react-redux';
 import s from './styles';
@@ -33,10 +34,10 @@ class Add extends Component {
     this.setState({pw});
   }
   remarksChange(remarks, ...arr) {
-    console.log(arr);
     this.setState({remarks});
   }
   save() {
+    Keyboard.dismiss();
     const {name, pw, remarks} = this.state;
     if (name.trim() === '' && pw.trim() === '' && remarks.trim() === '') {
       this.setState({tips: '请输入信息！', visible: true})
@@ -69,6 +70,7 @@ class Add extends Component {
           clear
           value={name}
           onChange={this.nameChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         >账号：</InputItem>
         <InputItem
           style={{borderBottomWidth: 1}}
@@ -76,6 +78,7 @@ class Add extends Component {
           clear
           value={pw}
           onChange={this.pwChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         >密码：</InputItem>
         <WhiteSpace />
         <Text style={{marginLeft: 15, fontSize: 17}}>备注：</Text>
@@ -87,6 +90,7 @@ class Add extends Component {
           rows={4}
           value={remarks}
           onChange={this.remarksChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         />
         <WhiteSpace size='lg'/>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>

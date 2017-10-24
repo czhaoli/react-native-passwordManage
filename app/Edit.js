@@ -38,7 +38,7 @@ class Edit extends Component {
     this.setState({name, pw, remarks,});
   }
   delete() {
-    alert('删除提示', '您确定要删除吗?', [
+    alert('删除提示', <View style={{width: 200, height:40, justifyContent: 'center'}}><Text>您确定要删除吗?</Text></View>, [
       { text: '取消' },
       { text: '确定', onPress: this.deleteHandler.bind(this) },
     ])
@@ -107,6 +107,7 @@ class Edit extends Component {
           clear
           value={name}
           onChange={this.nameChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         >账号：</InputItem>
         <InputItem
           style={{borderBottomWidth: 1}}
@@ -114,6 +115,7 @@ class Edit extends Component {
           clear
           value={pw}
           onChange={this.pwChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         >密码：</InputItem>
         <WhiteSpace />
         <Text style={{marginLeft: 15, fontSize: 17}}>备注：</Text>
@@ -125,6 +127,7 @@ class Edit extends Component {
           rows={4}
           value={remarks}
           onChange={this.remarksChange.bind(this)}
+          onSubmitEditing={this.save.bind(this)}
         />
         <WhiteSpace size='lg'/>
         <WingBlank>
