@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/splash"
+    android:scaleType="centerCrop" />
+<!-- <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <bitmap android:gravity='center' android:src='@drawable/title'/>
+  </item>
+  <item>
+    <bitmap android:gravity='bottom' android:src='@drawable/tips'/>
+  </item>
+</layer-list> -->
