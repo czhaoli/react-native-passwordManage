@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Keyboard,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, StateUtils } from 'react-navigation'
@@ -16,10 +17,12 @@ import * as actions from './redux/storage/storageAct';
 const arrow = require('antd-mobile/lib/style/images/arrow.png');
 import {Line, Arrow} from 'antd-mobile/lib/list/style/index.native';
 
+const navAndroid = {header: <View/>, title: '列表', };
+const navIos = {
+  title: '列表',
+};
 class DataList extends Component {
-  static navigationOptions = {
-    title: '列表'
-  }
+  static navigationOptions = Platform.OS === 'ios' ? navIos : navAndroid
   componentDidMount() {
     this.props.getList();
   }
