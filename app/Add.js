@@ -5,6 +5,7 @@ import {
   TextInput,
   Modal,
   Keyboard,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import s from './styles';
@@ -13,10 +14,12 @@ import {InputItem, TextareaItem, WhiteSpace, Button} from 'antd-mobile';
 import * as actions from './redux/storage/storageAct';
 import lodash from 'lodash';
 
+const navAndroid = {header: <View style={{backgroundColor:'red'}}/>, title: '新增'};
+const navIos = {
+  title: '新增',
+};
 class Add extends Component {
-  static navigationOptions = {
-    title: '新增'
-  }
+  static navigationOptions = Platform.OS === 'ios' ? navIos : navAndroid
   state = {
     name: '',
     pw: '',
@@ -104,6 +107,7 @@ class Add extends Component {
           >清空</Button>
         </View>
         <Modal
+          onRequestClose={()=>{}}
           animationType={"fade"}
           visible={visible}
           transparent={true}

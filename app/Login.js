@@ -150,6 +150,7 @@ class Login extends Component {
         <WhiteSpace />
         {this.renderPage()}
         <Modal
+          onRequestClose={()=>{}}
           animationType={"fade"}
           visible={visible}
           transparent={true}

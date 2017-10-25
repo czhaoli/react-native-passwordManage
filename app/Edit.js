@@ -38,7 +38,7 @@ class Edit extends Component {
     this.setState({name, pw, remarks,});
   }
   delete() {
-    alert('删除提示', <View style={{width: 200, height:40, justifyContent: 'center'}}><Text>您确定要删除吗?</Text></View>, [
+    alert('删除提示', <Text style={{height:33, lineHeight: 33}}>您确定要删除吗?</Text>, [
       { text: '取消' },
       { text: '确定', onPress: this.deleteHandler.bind(this) },
     ])
@@ -97,6 +97,13 @@ class Edit extends Component {
   closeModal() {
     this.setState({visible: false});
   }
+  toFixed(num) {
+    return (num/100).toFixed(2).replace('0.', '');
+  }
+  formatDate(str) {
+    const d = new Date(str);
+    return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${this.toFixed(d.getHours())}:${this.toFixed(d.getMinutes())}:${this.toFixed(d.getSeconds())}`;
+  }
   render() {
     const {name, pw, visible, tips, remarks, updateDate, createDate} = this.state;
     return (
@@ -131,8 +138,8 @@ class Edit extends Component {
         />
         <WhiteSpace size='lg'/>
         <WingBlank>
-          <Text style={{fontSize: 17, lineHeight: 24}}>创建日期：{new Date(createDate).toLocaleString()}</Text>
-          <Text style={{fontSize: 17, lineHeight: 24}}>修改日期：{new Date(updateDate).toLocaleString()}</Text>
+          <Text style={{fontSize: 17, lineHeight: 24}}>创建日期：{this.formatDate(createDate)}</Text>
+          <Text style={{fontSize: 17, lineHeight: 24}}>修改日期：{this.formatDate(updateDate)}</Text>
         </WingBlank>
         <WhiteSpace size='lg'/>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
@@ -151,6 +158,7 @@ class Edit extends Component {
           >删除</Button>
         </View>
         <Modal
+          onRequestClose={()=>{}}
           animationType={"fade"}
           visible={visible}
           transparent={true}
